@@ -12,21 +12,23 @@ import java.util.NoSuchElementException;
 @Service
 public class PessoaService {
     @Autowired
-    private PessoaRepository repository;
+    private PessoaRepository pessoaRepository;
 
     public List<Pessoa> findAll() {
-        return repository.findAll();
+        return pessoaRepository.findAll();
     }
 
     public Pessoa findById(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow(() -> new NoSuchElementException("teste"));
+        return pessoaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("teste"));
     }
 
+    // insert e update
     public Pessoa save(Pessoa pessoa) {
-        return repository.save(pessoa);
+        return pessoaRepository.save(pessoa);
     }
 
-//    public Pessoa update(Pessoa pessoa) {
-//        Pessoa pessoaToUpdate = repository.findBy(pessoa.getId());
-//    }
+    public void delete(@PathVariable Long id) {
+        pessoaRepository.deleteById(id);
+    }
 }
